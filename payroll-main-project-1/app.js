@@ -214,3 +214,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial render of the employee cards
   renderEmployees();
 });
+
+async function displayData() {
+  const container = document.getElementById("data-container");
+  try {
+    // Fetch the JSON file
+    const response = await fetch("EmployeeData.json");
+    const data = await response.json()
+  }

@@ -4,270 +4,254 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Attendance Graph</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- External Libraries and Styles -->
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- D3.js library for charts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css"> <!-- Custom CSS -->
 </head>
 <body>
 
-  <!-- bootstrap Offcanvas navbar -->
- <nav class="navbar bg-body-tertiary fixed-top" style="background: linear-gradient(135deg, #405766,#ffffff, #5F7C8A, #ffffff);">
-  <!-- <div class="container-fluid"> -->
-      <a class="navbar-brand" href="#">ModernTech Solutions</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ModernTech Solutions</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
+  <!-- Bootstrap Offcanvas Navbar -->
+  <nav class="navbar bg-body-tertiary fixed-top" style="background: linear-gradient(135deg, #405766,#ffffff, #5F7C8A, #ffffff);">
+    <a class="navbar-brand" href="#">ModernTech Solutions</a>
+    <!-- Toggler button for offcanvas menu -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Offcanvas menu content -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ModernTech Solutions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- Navigation links -->
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <!-- Search form -->
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
       </div>
     </div>
   </nav> 
 
+ <!-- Video Section -->
 <section class="background-video">
-  
-  <!-- <iframe src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-
-<video autoplay muted loop  plays-inline class="background-clip" >
-  <source src="https://www.youtube.com/embed/uHho4f5NykU?list=PLLBWNs6n7YMUihYEVNEUGB29t3Rfq6bTa&index=4" type="video/mp4">
-</video>
-<div class="content">
-  <h1>Dashboard</h1>
-
-  <h2>Wecome back</h2>
-  <h3>Mia Thompson</h3>
-  <a href="about.html">View More</a>
-</div>
-
+  <!-- Background video looping with no sound -->
+  <video autoplay muted loop playsinline class="background-clip">
+    <source src="./video/background-clip.mp4" type="video/mp4">
+  </video>
+  <!-- Content overlay on the video -->
+  <div class="content">
+    <!-- <h1>Dashboard</h1> -->
+    <h2>Welcome back</h2>
+    <h3>Mia Thompson</h3>
+    <a href="about.html">View More</a>
+  </div>
 </section>
 
-  <!-- Chatbot and D3.js -->
-   <!-- attendence chart -->
- 
 
-  <section class="work-atten">
-    <h1>Work Attendance Chart</h1>
-    <!-- Card containing the chart -->
-    <div class="card-body">
-      <div class="inside-attendance-card">
-        <div class="header">
-          <h5 class="card-title">Work Attendance</h5>
+  <!-- Main Dashboard Content -->
+  <main class="parent">
+
+    <!-- Work Attendance Section -->
+    <section class="work-atten">
+      <div class="card-body">
+        <div class="inside-attendance-card">
+          <div class="header">
+            <h5 class="card-title">Work Attendance</h5>
             <a href="./empolyee.html" class="see-all">See All</a>
           </div>
           <p class="card-text">There are 15 employees present and 5 absent today.</p>
+          <!-- Placeholder for attendance chart -->
           <div class="chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section>
+      <div class="card-body">
+        <div class="inside-schedule-card">
+          <div class="header">
+            <h5 class="card-title">Schedule</h5>
+            <a href="./leave.html" class="see-all">See All</a>
+          </div>
+          <!-- Navigation for months -->
+          <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-outline-secondary btn-sm" id="prev-month">&#x2039;</button>
+            <span>Dec, 2024</span>
+            <button class="btn btn-outline-secondary btn-sm" id="next-month">&#x203A;</button>
+          </div>
+          <!-- Calendar Display -->
+          <div class="calender">
+            <div class="d-flex justify-content-around">
+              <div>18</div>
+              <div>19</div>
+              <div class="bg-primary text-white rounded-circle p-2">20</div>
+              <div>21</div>
+              <div>22</div>
+            </div>
+          </div>
+          <!-- Search Bar -->
+          <input type="text" class="form-control mt-3" placeholder="Search Schedule">
+        </div>
+      </div>
+    </section>
+
+    <!-- Time Off Section -->
+    <section>
+      <div class="card-body">
+        <div class="inside-timeoff-card">
+          <div class="header">
+            <h5 class="card-title">Time Off</h5>
+            <a href="./empolyee.html" class="see-all">See All</a>
+          </div>
+          <!-- Circular Progress Bar -->
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="progress-circle mt-3">
+              <svg width="100" height="100">
+                <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+                <circle class="progress-value" cx="50" cy="50" r="45" stroke="#6A5ACD" stroke-dasharray="283" stroke-dashoffset="113"></circle>
+              </svg>
+              <div class="text">15 <br><span style="font-size: 12px;">OUT OF 20</span></div>
+            </div>
+          </div>
+          <!-- Time Off Requests -->
+          <div class="time-off-item">
+            <div><span>Aug 11, 2024</span> <small>[Sick]</small></div>
+            <span class="badge bg-warning text-dark">Pending</span>
+          </div>
+          <div class="time-off-item">
+            <div><span>Dec 17, 2024</span> <small>[Annual]</small></div>
+            <span class="badge bg-success">Confirmed</span>
+          </div>
+          <div class="time-off-item">
+            <div><span>Nov 20, 2024</span> <small>[Casual]</small></div>
+            <span class="badge bg-danger">Rejected</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Employee Tracker Section -->
+    <section >
+      <div class="card-body">
+        <div class="inside-employee-card">
+          <div class="header">
+            <h5>Employee Tracker</h5>
+            <a href="./empolyee.html" class="see-all">See All</a>
+          </div>
         
-        <!-- Button at the bottom -->
-         <!-- got the code from chat` -->
-    <!-- <button class="btn btn-primary" style="display: block; margin: 0 auto;">View Details</button> -->
-        </div>
-        </div>
-      </div>
-      </div>
-    
-  </section>
-  
-  
-
-<!-- bootstrap code -->
-
-<br>
- <section>
-  <div class="card-body">
-    <div class="inside-schedule-card">
-    <div class="header">
-      <h5 class="card-title">Schedule</h5>
-        <a href="./leave.html" class="see-all">See All</a>
-      </div>
-
-<!-- Navigation for months -->
-<div class="d-flex justify-content-between align-items-center">
-    <button class="btn btn-outline-secondary btn-sm" id="prev-month">&#x2039;</button>
-    <span>Dec, 2024</span>
-  <button class="btn btn-outline-secondary btn-sm" id="next-month">&#x203A;</button>
-</div>
-  <!-- Calender Section -->
-
-   <div class="calender">
-    <div class="d-flex justify-content-around">
-      <div>18</div>
-      <div>19</div>
-      <div class="bg-primary text-white rounded-circle p-2">20</div>
-      <div>21</div>
-      <div>22</div>
-    </div>
-  </div>
-
-      <!-- Searchbar -->
-       <input type="text" class="form-control mt-3" placeholder="Search Schedule">
- 
-    </div>
-    </div>
-    <!-- <button class="btn btn-primary" style="display: block; margin: 0 auto;">View Details</button> -->
-
-  </div>
- </section>
-
- <br>
-  <section>
-    <div class="card-body">
-      <div class="inside-timeoff-card">
-    <div class="header">
-        <h5 class="card-title">Time Off</h5>
-          <a href="./empolyee.html" class="see-all">See All</a>
-        </div>
+          <div class="employee-section">
+            <h6>Absent</h6>
+            <div class="employee-item">
+              <img src="./images/photo-2.jpg" alt="James Brown" class="avatar">
+              <div class="employee-info">
+                <p><strong>James Brown</strong> <span>💼</span></p>
+                <p>Research and Development</p>
+              </div>
+              <div class="employee-badge">Absent</div>
+            </div>
+          </div>
         
+          <div class="employee-section">
+            <h6>Away</h6>
+            <div class="employee-item">
+              <img src="./images/photo-3.jpg" alt="Sophia Williams" class="avatar">
+              <div class="employee-info">
+                <p><strong>Sophia Williams</strong> <span>🌟</span></p>
+                <p>Finance</p>
+              </div>
+              <div class="employee-time">25m</div>
+            </div>
         
-
-        <!-- Circular progress bar -->
-
-<div class="d-flex justify-content-between align-items-center">
-  <div class="progress-circle mt-3">
-      <svg width="100" height="100">
-      <circle class="progress-background" cx="50" cy="50" r="45"></circle>
-      <circle class="progress-value" cx="50" cy="50" r="45" 
-                      stroke="#6A5ACD" stroke-dasharray="283" stroke-dashoffset="113"></circle>
-      </svg>
-      <div class="text">15 <br><span style="font-size: 12px;">OUT OF 20</span></div>
-      </div>
-        </div>
-
-    <!-- Time Off Requests -->
+            <div class="employee-item">
+              <img src="./images/photo-4.jpg" alt="Arthur Taylor" class="avatar">
+              <div class="employee-info">
+                <p><strong>Arthur Taylor</strong> <span>📈</span></p>
+                <p>Sales</p>
+              </div>
+              <div class="employee-time">12m</div>
+            </div>
+        
+            <div class="employee-item">
+              <img src="./images/photo-1.jpg" alt="Emma Wright" class="avatar">
+              <div class="employee-info">
+                <p><strong>Emma Wright</strong> <span>📱</span></p>
+                <p>Operations Management</p>
+              </div>
+              <div class="employee-time">8m</div>
+            </div>
+          </div>
+          <!-- <button class="btn btn-primary" style="display: block; margin: 0 auto;">View Details</button> -->
   
-    <div class="time-off-item">
-      <div>
-        <span>Aug 11, 2024</span> <small>[Sick]</small>
-      </div>
-      <span class="badge bg-warning text-dark">Pending</span>
-    </div>
-    <div class="time-off-item">
-      <div>
-        <span>Dec 17, 2024</span> <small> [Annual]</small>
-      </div>
-      <span class="badge bg-success"> Confirmed </span>
-    </div>
-    <div class="time-off-item">
-      <div>
-        <span>Nov 20, 2024</span> <small>[Casual]</small>
-      </div>
-      <span class="badge bg-danger">Rejected</span>
-    </div> <br>
- 
-<br>
-</div>
-    </div>
-  </section>
-
-  <br>
-  <!-- employee-tracker -->
-  <section >
-    <div class="card-body">
-      <div class="inside-employee-card">
-        <div class="header">
-          <h5>Employee Tracker</h5>
-          <a href="./empolyee.html" class="see-all">See All</a>
         </div>
-      
-        <div class="employee-section">
-          <h6>Absent</h6>
-          <div class="employee-item">
-            <img src="avatar1.png" alt="James Brown" class="avatar">
-            <div class="employee-info">
-              <p><strong>James Brown</strong> <span>💼</span></p>
-              <p>Research and Development</p>
-            </div>
-            <div class="employee-badge">Absent</div>
-          </div>
-        </div>
-      
-        <div class="employee-section">
-          <h6>Away</h6>
-          <div class="employee-item">
-            <img src="avatar2.png" alt="Sophia Williams" class="avatar">
-            <div class="employee-info">
-              <p><strong>Sophia Williams</strong> <span>🌟</span></p>
-              <p>Finance</p>
-            </div>
-            <div class="employee-time">25m</div>
-          </div>
-      
-          <div class="employee-item">
-            <img src="avatar3.png" alt="Arthur Taylor" class="avatar">
-            <div class="employee-info">
-              <p><strong>Arthur Taylor</strong> <span>📈</span></p>
-              <p>Sales</p>
-            </div>
-            <div class="employee-time">12m</div>
-          </div>
-      
-          <div class="employee-item">
-            <img src="avatar2.png" alt="Emma Wright" class="avatar">
-            <div class="employee-info">
-              <p><strong>Emma Wright</strong> <span>📱</span></p>
-              <p>Operations Management</p>
-            </div>
-            <div class="employee-time">8m</div>
-          </div>
-        </div>
-        <!-- <button class="btn btn-primary" style="display: block; margin: 0 auto;">View Details</button> -->
-
       </div>
-    </div>
-  </section>
+    </section>
+    </section>
 
+  </main>
 
+  <!-- Footer Section -->
   <section class="footer">
-    
-    <!-- Card containing the chart -->
-    <div class="card">
-      <div class="">
-        <div class="header">
-          <h5 class="card-title"></h5><p>© 2024 ModernTech Solutions</p>
-          <div class="chart"></div>
-        
-        <!-- Button at the bottom -->
-         <!-- got the code from chat` -->
-    <!-- <button class="btn btn-primary" style="display: block; margin: 0 auto;">View Details</button> -->
-        </div>
-        </div>
+    <div class="footer-top">
+      <p>© 2024 ModernTech Solutions</p>
+      <p>Innovating Healthcare with Technology</p>
+
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </div>
+    <h4>Follow Us</h4>
+      <div class="footer-images">
+        <!-- social media icons -->
+        <a href="https://facebook.com" target="_blank">
+          <img src="./images/facebook.png" alt="Facebook" class="footer-icon">
+        </a>
+        <a href="https://twitter.com" target="_blank">
+          <img src="images/twitter.png" alt="Twitter" class="footer-icon">
+        </a>
+        <a href="https://linkedin.com" target="_blank">
+          <img src="images/linkedin.png" alt="LinkedIn" class="footer-icon">
+        </a>
+        <a href="https://instagram.com" target="_blank"> 
+          <img src="images/instagram.png" alt="Instagram" class="footer-icon">
+        </a>
+        <a href="https://tiktok.com" target="_blank"> 
+          <img src="./images/tiktok.png" alt="tiktok" class="footer-icon">
+        </a>
       </div>
-      </div>
-    
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 ModernTech Solutions. All rights reserved.</p>
+    </div>
   </section>
   
-<script src="app.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <!-- JavaScript Scripts -->
+  <script src="app.js"></script> <!-- Custom JavaScript -->
+  <script src="https://d3js.org/d3.v7.min.js"></script> <!-- D3.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js -->
 </body>
 </html>
