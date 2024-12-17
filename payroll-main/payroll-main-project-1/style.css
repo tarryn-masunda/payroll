@@ -414,17 +414,6 @@ text {
   border-radius: 15px;
   font-weight: bold;
 }
-/* employee data */
-.card {
-  margin: 10px;
-}
-#attendanceChart {
-  height: 300px;
-}
-.employee-cards {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 
 @media (max-width: 768px) {

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Attendance Graph</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <nav class="navbar bg-body-tertiary fixed-top" style="background: linear-gradient(135deg, #405766,#ffffff, #5F7C8A, #ffffff);">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">ModernTech Solutions</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">ModernTech Solutions</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav> 
+
+  <section>
+    <iframe src="https://www.youtube.com/embed/uHho4f5NykU?list=PLLBWNs6n7YMUihYEVNEUGB29t3Rfq6bTa&index=4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="content">
+      <h1>Dashboard</h1>
+      <h2>Welcome back</h2>
+      <h3>Mia Thompson</h3>
+    </div>
+  </section>
+
+  <section class="work-atten">
+    <h1>Work Attendance Chart</h1>
+    <div class="card-body">
+      <div class="inside-card">
+        <div class="card-attendance">
+          <h5 class="card-title">Work Attendance</h5>
+          <a href="./empolyee.html" class="see-all">See All</a>
+        </div>
+        <p class="card-text">There are 15 employees present and 5 absent today.</p>
+        <div class="chart"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card-body">
+      <div class="inside-card">
+        <div class="card-schedule">
+          <h5 class="card-title">Schedule</h5>
+          <a href="./leave.html" class="see-all">See All</a>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <button class="btn btn-outline-secondary btn-sm" id="prev-month">&#x2039;</button>
+          <span>Dec, 2024</span>
+          <button class="btn btn-outline-secondary btn-sm" id="next-month">&#x203A;</button>
+        </div>
+        <div class="calender">
+          <div class="d-flex justify-content-around">
+            <div>18</div>
+            <div>19</div>
+            <div class="bg-primary text-white rounded-circle p-2">20</div>
+            <div>21</div>
+            <div>22</div>
+          </div>
+        </div>
+        <input type="text" class="form-control mt-3" placeholder="Search Schedule">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card-body">
+      <div class="inside-card">
+        <div class="card-timeOff">
+          <h5 class="card-title">Time Off</h5>
+          <a href="./empolyee.html" class="see-all">See All</a>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="progress-circle mt-3">
+            <svg width="100" height="100">
+              <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+              <circle class="progress-value" cx="50" cy="50" r="45" stroke="#6A5ACD" stroke-dasharray="283" stroke-dashoffset="113"></circle>
+            </svg>
+            <div class="text">15 <br><span style="font-size: 12px;">OUT OF 20</span></div>
+          </div>
+        </div>
+        <div class="time-off-item">
+          <div><span>Aug 11, 2024</span> <small>[Sick]</small></div>
+          <span class="badge bg-warning text-dark">Pending</span>
+        </div>
+        <div class="time-off-item">
+          <div><span>Dec 17, 2024</span> <small>[Annual]</small></div>
+          <span class="badge bg-success">Confirmed</span>
+        </div>
+        <div class="time-off-item">
+          <div><span>Nov 20, 2024</span> <small>[Casual]</small></div>
+          <span class="badge bg-danger">Rejected</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="">
+    <div class="card-body">
+      <div class="inside-card">
+        <div class="employee-header">
+          <h5>Employee Tracker</h5>
+          <a href="./empolyee.html" class="see-all">See All</a>
+        </div>
+        <div class="employee-section">
+          <h6>Absent</h6>
+          <div class="employee-item">
+            <img src="avatar1.png" alt="James Brown" class="avatar">
+            <div class="employee-info">
+              <p><strong>James Brown</strong> <span>💼</span></p>
+              <p>Research and Development</p>
+            </div>
+            <div class="employee-badge">Absent</div>
+          </div>
+        </div>
+        <div class="employee-section">
+          <h6>Away</h6>
+          <div class="employee-item">
+            <img src="avatar2.png" alt="Sophia Williams" class="avatar">
+            <div class="employee-info">
+              <p><strong>Sophia Williams</strong> <span>🌟</span></p>
+              <p>Finance</p>
+            </div>
+            <div class="employee-time">25m</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  
+<script src="app.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>

@@ -1,118 +1,108 @@
-document.addEventListener('DOMContentLoaded', function(){
+// Ensure that the DOM is fully loaded before running any JavaScript
+document.addEventListener('DOMContentLoaded', function() {
 
-      let errorMessage = document.getElementById('error-message');
-
+  // Setting the navbar background with a gradient color and styling the body background
   document.getElementById('navbar').style.backgroundColor = "linear-gradient(135deg, #405766, #5F7C8A, #ffffff, black)";
-  document.body.style.backgroundSize = 'cover';
-  document.body.style.backgroundPosition = 'center';
-  document.body.style.backgroundRepeat = 'no-repeat';
-  document.body.style.height = '100vh';
-})
+  document.body.style.backgroundSize = 'cover';  // Ensures the background image covers the full page
+  document.body.style.backgroundPosition = 'center';  // Centers the background image
+  document.body.style.backgroundRepeat = 'no-repeat';  // Prevents the background from repeating
+  document.body.style.height = '100vh';  // Ensures the body covers the full viewport height
+});
 
-// Step 1: Add an event listener to the form
+// Event listener for form submission
 document.addEventListener("DOMContentLoaded", () => {
-  // Get the form, input fields, and error message element
-  let loginForm = document.getElementById("login-form");
-  let userIDInput = document.getElementById("userID");
-  let passwordInput = document.getElementById("password");
-  let errorMessage = document.getElementById("error-message");
+  let loginForm = document.getElementById("login-form"); // Getting the login form
+  let userIDInput = document.getElementById("userID"); // Getting the userID input field
+  let passwordInput = document.getElementById("password"); // Getting the password input field
+  let errorMessage = document.getElementById("error-message"); // Error message element
 
-  // Predefined valid credentials (for demonstration purposes)
+  // Predefined valid credentials for the login (for demo purposes)
   let validUserCredentials = {
     userID: "HRX-45312",
     password: "WorkFlow#789",
   };
 
-  // Step 2: Handle form submission
+  // Form submission handler
   loginForm.addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent the form from reloading the page
+    event.preventDefault(); // Prevent the default form submission (page reload)
 
+    // Get the entered values from the form
     let enteredUserID = userIDInput.value.trim();
     let enteredPassword = passwordInput.value.trim();
 
-    // Step 3: Validate credentials
+    // Validate the credentials
     if (
       enteredUserID === validUserCredentials.userID &&
       enteredPassword === validUserCredentials.password
     ) {
-      // Successful login
+      // If valid, hide the error message and alert the user
       errorMessage.style.display = "none";
       alert("Login successful!");
-      // Redirect to another page 
-      window.location.href = "./dashboard.html";
+      window.location.href = "./dashboard.html"; // Redirect to the dashboard
     } else {
-      // Invalid login
+      // If invalid, display the error message
       errorMessage.style.display = "block";
       errorMessage.textContent = "Invalid Login Credentials. Please try again.";
     }
   });
 });
 
+// Attendance Pie Chart with D3.js
+let data = [
+  { label: "Present", value: 15, color: "#4CAF50" },
+  { label: "Absent", value: 5, color: "#F44336" }
+];
 
-// let timeOffCard = document.querySelector('.time-off')
+// Setting the dimensions of the pie chart
+let width = 200;
+let height = 200;
+let radius = Math.min(width, height) / 2;
 
-  // Chart container inside the card 
-    
-      // Data: 15 present, 5 absent
-      let data = [
-        { label: "Present", value: 15, color: "#4CAF50" },
-        { label: "Absent", value: 5, color: "#F44336" }
-    ];
+// Create the SVG element for the pie chart and position it
+let svg = d3.select(".chart")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height)
+  .append("g")
+  .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-    // Set dimensions of the chart
-    let width = 200; // Adjust to fit inside the card
-    let height = 200;
-    let radius = Math.min(width, height) / 2;
+// Create a pie layout for the data
+let pie = d3.pie().value(d => d.value);
 
-    // Create an SVG container inside the chart div
-    let svg = d3.select(".chart")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+// Define the arc for the slices of the pie chart
+let arc = d3.arc().innerRadius(0).outerRadius(radius);
 
-    // Create a pie layout
-    let pie = d3.pie()
-        .value(d => d.value);
+// Add the slices to the pie chart
+svg.selectAll("path")
+  .data(pie(data))
+  .enter()
+  .append("path")
+  .attr("d", arc)
+  .attr("fill", d => d.data.color)
+  .attr("stroke", "#fff")
+  .attr("stroke-width", "2px");
 
-    // Define the arc generator
-    let arc = d3.arc()
-        .innerRadius(0) // Full pie (no hole)
-        .outerRadius(radius);
+// Add labels for each slice of the pie chart
+svg.selectAll("text")
+  .data(pie(data))
+  .enter()
+  .append("text")
+  .attr("transform", d => `translate(${arc.centroid(d)})`)
+  .attr("text-anchor", "middle")
+  .style("font-size", "12px")
+  .style("fill", "#000")
+  .text(d => d.data.label);
 
-    // Add pie slices
-    svg.selectAll("path")
-        .data(pie(data))
-        .enter()
-        .append("path")
-        .attr("d", arc)
-        .attr("fill", d => d.data.color)
-        .attr("stroke", "#fff")
-        .attr("stroke-width", "2px");
-        
-        
-
-    // Add labels to the slices
-    svg.selectAll("text")
-        .data(pie(data))
-        .enter()
-        .append("text")
-        .attr("transform", d => `translate(${arc.centroid(d)})`)
-        .attr("text-anchor", "middle")
-        .style("font-size", "12px")
-        .style("fill", "#000")
-        .text(d => d.data.label);
-
-// Optional: Script to dynamically set progress value
+// Optional: Script to dynamically update a circular progress bar
 const progressValue = document.querySelector(".progress-value");
 const total = 20;
 const completed = 16;
-const circumference = 2 * Math.PI * 45; // 2πr, r=45
+const circumference = 2 * Math.PI * 45; // Circumference of the circle (radius = 45)
 
 progressValue.style.strokeDasharray = circumference;
 progressValue.style.strokeDashoffset = circumference - (completed / total) * circumference;
 
+// Employee attendance and leave requests data
 document.addEventListener('DOMContentLoaded', () => {
   const attendanceAndLeave = [
     {
@@ -129,36 +119,34 @@ document.addEventListener('DOMContentLoaded', () => {
         { date: "2024-11-22", reason: "Sick Leave", status: "Approved" },
         { date: "2024-12-01", reason: "Personal", status: "Pending" }
       ],
-      showDetails: false // Control visibility of the details
+      showDetails: false // Controls visibility of the details
     },
-    // Additional employee objects can be added here
   ];
 
-  // Function to toggle visibility of the employee details
+  // Function to toggle the visibility of employee details
   const toggleDetails = (employeeId) => {
     const employee = attendanceAndLeave.find(emp => emp.employeeId === employeeId);
-    employee.showDetails = !employee.showDetails; // Toggle the visibility flag
-    renderEmployees(); // Re-render the employees to update the details
+    employee.showDetails = !employee.showDetails; // Toggle visibility flag
+    renderEmployees(); // Re-render employees
   };
 
   // Function to render the employee cards
   const renderEmployees = () => {
     const employeeRegister = document.querySelector('.employee-register');
-    employeeRegister.innerHTML = ''; // Clear existing cards before rendering
+    employeeRegister.innerHTML = ''; // Clear existing employee cards
 
     attendanceAndLeave.forEach(employee => {
       const card = document.createElement('div');
       card.classList.add('employee-card');
-      card.addEventListener('click', () => toggleDetails(employee.employeeId)); // Attach click event to toggle details
+      card.addEventListener('click', () => toggleDetails(employee.employeeId)); // Attach click event
 
       const nameElement = document.createElement('h2');
       nameElement.textContent = employee.name;
-
       card.appendChild(nameElement);
 
-      // If details should be visible, create and append the attendance and leave request tables
+      // If details are to be shown, create tables for attendance and leave
       if (employee.showDetails) {
-        // Attendance Table
+        // Create attendance table
         const attendanceTable = document.createElement('table');
         const attendanceHeader = document.createElement('thead');
         attendanceHeader.innerHTML = `
@@ -181,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         attendanceTable.appendChild(attendanceBody);
         card.appendChild(attendanceTable);
 
-        // Leave Requests Table
+        // Create leave requests table
         const leaveTable = document.createElement('table');
         const leaveHeader = document.createElement('thead');
         leaveHeader.innerHTML = `
@@ -211,14 +199,108 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Initial render of the employee cards
+  // Initial render
   renderEmployees();
 });
 
-async function displayData() {
-  const container = document.getElementById("data-container");
-  try {
-    // Fetch the JSON file
-    const response = await fetch("EmployeeData.json");
-    const data = await response.json()
-  }
+// Product Sales Bar Chart with Chart.js
+const salesChart = document.getElementById('salesChart').getContext('2d');
+new Chart(salesChart, {
+  type: 'bar',
+  data: {
+    labels: ['1 Jul', '2 Jul', '3 Jul', '4 Jul', '5 Jul'],
+    datasets: [
+      {
+        label: 'Revenue',
+        backgroundColor: '#007b5e',
+        data: [50000, 60000, 70000, 50000, 80000]
+      },
+      {
+        label: 'Gross Margin',
+        backgroundColor: '#f78c1f',
+        data: [30000, 40000, 50000, 30000, 40000]
+      }
+    ]
+  },
+  options: { responsive: true }
+});
+
+// Sales by Product Category Doughnut Chart
+const categoryChart = document.getElementById('categoryChart').getContext('2d');
+new Chart(categoryChart, {
+  type: 'doughnut',
+  data: {
+    labels: ['Living Room', 'Kids', 'Kitchen', 'Dining Room'],
+    datasets: [
+      {
+        data: [30, 20, 25, 25],
+        backgroundColor: ['#007b5e', '#f78c1f', '#f7c331', '#17a2b8']
+      }
+    ]
+  },
+  options: { responsive: true }
+});
+
+// Fetch employee data from JSON file and display it in a list
+fetch('data.json')
+  .then(response => response.json())  // Parse the JSON response
+  .then(data => {
+    const employeeList = document.getElementById('employee_info');
+    data.forEach(employee => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${employee.name} - ${employee.position}`;
+      employeeList.appendChild(listItem);
+    });
+  })
+  .catch(error => {
+    console.error('Error loading JSON:', error);
+  });
+
+// Employee data (hardcoded for now)
+const employeeData = [
+  // Add employee objects here
+];
+
+// Display employee cards dynamically
+function displayEmployees() {
+  const employeeCardsContainer = document.getElementById('employeeCards');
+  employeeData.forEach(employee => {
+    const card = document.createElement('div');
+    card.className = 'card col-md-3';
+    card.innerHTML = `
+      <div class="card-body">
+        <h5 class="card-title">${employee.name}</h5>
+        <p class="card-text">${employee.position}</p>
+        <button class="btn btn-primary" onclick="showAttendanceGraph(${employee.employeeId})">View Attendance</button>
+      </div>
+    `;
+    employeeCardsContainer.appendChild(card);
+  });
+}
+
+// Function to generate attendance graph for each employee
+function showAttendanceGraph(employeeId) {
+  const attendanceData = {
+    labels: ["January", "February", "March", "April", "May"],
+    datasets: [{
+      label: 'Attendance',
+      data: [80, 90, 85, 75, 95],  // Random data for demonstration
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+      fill: false
+    }]
+  };
+
+  // Generate and display the attendance chart
+  const ctx = document.getElementById('attendanceChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: attendanceData,
+    options: {
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+
+// Initialize by displaying employee cards
+displayEmployees();
